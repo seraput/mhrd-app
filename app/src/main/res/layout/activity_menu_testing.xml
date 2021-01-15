@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuTesting">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Testing Menu"
+        android:textSize="24sp"
+        android:fontFamily="@font/allerta_stencil"
+        android:textColor="@color/teal_200"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/block_blue"
+            android:text="SPV PAGE"
+            android:id="@+id/spv_menu"
+            android:textSize="18sp"
+            android:onClick="spv"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/block_blue"
+            android:text="SPG PAGE"
+            android:id="@+id/spg_menu"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:onClick="spg"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/block_blue"
+            android:text="ADMIN PAGE"
+            android:id="@+id/adm_menu"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:onClick="adm"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/block_blue"
+            android:text="LOGIN PAGE"
+            android:id="@+id/login_menu"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:onClick="login"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

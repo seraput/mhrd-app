@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mhrd">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MHRD">
+        <activity android:name=".SpinnerRestTesting"></activity>
+        <activity android:name=".Views.Spv.Master.SpvMasterActivity" />
+        <activity android:name=".Views.Spv.Activity.SpvTaskActivity" />
+        <activity android:name=".Views.Admin.Master.Jobs.AddJobsActivity" />
+        <activity android:name=".Views.Admin.Master.Jobs.mJobsActivity" />
+        <activity android:name=".Views.Admin.Master.Branch.mBranchActivity" />
+        <activity android:name=".Views.Spg.Task.SpgTugasActivity" />
+        <activity android:name=".Views.Spg.Aktivitas.SpgAbsentActivity" />
+        <activity android:name=".Views.Admin.Master.Outlet.NewOutletActivity" />
+        <activity android:name=".Views.Admin.Master.Employe.NewEmployeActivity" />
+        <activity android:name=".Views.Admin.Master.Project.NewProjectActivity" />
+        <activity android:name=".Views.Admin.AdminMainActivity" />
+        <activity android:name=".Views.Admin.Master.AdminMasterActivity" />
+        <activity android:name=".Views.Spg.SpgMainActivity" />
+        <activity android:name=".Views.Admin.Master.Outlet.mOutletActivity" />
+        <activity android:name=".Views.Admin.Master.Employe.mEmployeeActivity" />
+        <activity android:name=".Views.Admin.Master.Project.mProjectActivity" />
+        <activity android:name=".Views.Admin.Laporan.AdminLaporanActivity" />
+        <activity android:name=".Views.Spg.SpgHistoryActivity" />
+        <activity android:name=".Views.Spg.SpgTaskActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MenuTesting" />
+        <activity android:name=".Views.Spv.SpvMainActivity" />
+        <activity android:name=".Views.Admin.Master.Absent.mAbsentActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">MHRD</string>
+    <string name="prefLoginState">loginstate</string>
+    <string name="check_stok_display"><![CDATA[Check Stok & Display]]></string>
+
+    <string-array name="keterangan">
+        <item>Pilih</item>
+        <item>Masuk</item>
+        <item>Pulang</item>
+    </string-array>
+
+    <string-array name="kelamin">
+        <item>Pilih</item>
+        <item>Pria</item>
+        <item>Wanita</item>
+    </string-array>
+
+    <string-array name="tipe">
+        <item>Pilih</item>
+        <item>General Trade</item>
+        <item>Modern Trade</item>
+    </string-array>
+
+    <string-array name="posisi">
+        <item>Pilih</item>
+        <item>Admin</item>
+        <item>Spv</item>
+        <item>Spg</item>
+    </string-array>
+
+    <string-array name="project">
+        <item>Pilih</item>
+        <item>Project 1</item>
+        <item>Project 2</item>
+        <item>Project 3</item>
+        <item>Project 4</item>
+        <item>Project 5</item>
+    </string-array>
+
+    <string-array name="data">
+        <item>FLUTTER</item>
+        <item>GO</item>
+        <item>PHP</item>
+        <item>JAVASCRIPT</item>
+        <item>FLUTTER</item>
+        <item>GO</item>
+        <item>PHP</item>
+        <item>JAVASCRIPT</item>
+        <item>FLUTTER</item>
+        <item>GO</item>
+        <item>PHP</item>
+        <item>JAVASCRIPT</item>
+        <item>FLUTTER</item>
+        <item>GO</item>
+        <item>PHP</item>
+        <item>JAVASCRIPT</item>
+        <item>FLUTTER</item>
+        <item>GO</item>
+        <item>PHP</item>
+        <item>JAVASCRIPT</item>
+    </string-array>
+</resources>
