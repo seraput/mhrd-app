@@ -89,8 +89,8 @@ public class SpgAbsentActivity extends AppCompatActivity {
         imgFoto = findViewById(R.id.tampungFoto);
         upload = findViewById(R.id.upload);
         spKet = findViewById(R.id.spKeterangan);
-        sessionManager = new SessionManager(this);
 
+        sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
         getNama = user.get(SessionManager.EMAIL);

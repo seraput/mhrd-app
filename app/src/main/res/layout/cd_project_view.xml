@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp">
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,13 +20,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create New Branch"
+                android:text="Project Running"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:textSize="16sp"/>
 
             <View
-                android:layout_width="140dp"
+                android:layout_width="120dp"
                 android:layout_height="2dp"
                 android:layout_gravity="center"
                 android:background="@android:color/darker_gray"/>
@@ -42,23 +42,57 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
-                    android:hint="Branch Name"
-                    android:inputType="textCapSentences"
+                    android:hint="Project ID"
+                    android:enabled="false"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:id="@+id/branchName"/>
+                    android:id="@+id/cdpId"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
-                    android:hint="Branch Address"
+                    android:hint="Project Name"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:inputType="text"
-                    android:id="@+id/branchAlamat"/>
+                    android:inputType="textMultiLine"
+                    android:id="@+id/cdpName"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
+                    android:hint="Branch Name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:enabled="false"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/cdpBranch"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
+                    android:hint="Area"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/cdpArea"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="normal"
+                    android:hint="Periode"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/cdpPeriode"/>
 
             </LinearLayout>
 
@@ -71,20 +105,10 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Cancel"
+                    android:text="Close"
                     android:textSize="12sp"
-                    android:id="@+id/btClose"
+                    android:id="@+id/cdpClosed"
                     android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Simpan"
-                    android:id="@+id/btSimpan"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"/>
 

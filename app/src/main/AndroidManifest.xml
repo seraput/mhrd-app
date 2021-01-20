@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MHRD">
-        <activity android:name=".SpinnerRestTesting"></activity>
+        <activity android:name=".Views.Spv.Master.SpgDailyActivity"></activity>
         <activity android:name=".Views.Spv.Master.SpvMasterActivity" />
         <activity android:name=".Views.Spv.Activity.SpvTaskActivity" />
         <activity android:name=".Views.Admin.Master.Jobs.AddJobsActivity" />
@@ -44,6 +44,7 @@
         <activity android:name=".Views.Spv.SpvMainActivity" />
         <activity android:name=".Views.Admin.Master.Absent.mAbsentActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".SpinnerRestTesting" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

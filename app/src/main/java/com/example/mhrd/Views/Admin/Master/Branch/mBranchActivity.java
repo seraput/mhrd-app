@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -88,6 +89,8 @@ public class mBranchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                mtName.setText("");
+                mtAddress.setText("");
             }
         });
 
@@ -106,6 +109,8 @@ public class mBranchActivity extends AppCompatActivity {
         });
         //Get Data
         receiveData();
+
+        mtName.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
     }
 
     public void back(View view) {
@@ -126,6 +131,8 @@ public class mBranchActivity extends AppCompatActivity {
                         if (response.equalsIgnoreCase("success")) {
                             Toast.makeText(mBranchActivity.this, "Berhasil!", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
+                            mtName.setText("");
+                            mtAddress.setText("");
                             dialog.dismiss();
                             receiveData();
                         }

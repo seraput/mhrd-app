@@ -242,6 +242,7 @@ public class SpgTugasActivity extends AppCompatActivity {
         String image = null;
         String tanggal = tvTgl.getText().toString();
         String user_id = tvID.getText().toString();
+        String user_nama = getNama;
         if (bitmap == null) {
             image = "";
         } else {
@@ -250,7 +251,7 @@ public class SpgTugasActivity extends AppCompatActivity {
 
         apiInterface = ApiClient.getApiClient().create(ApiInterfaceDaily.class);
 
-        Call<DailyReport> call = apiInterface.insertData(key, jobs_id, branch, project, outlet, product, qty, image, tanggal, user_id);
+        Call<DailyReport> call = apiInterface.insertData(key, jobs_id, branch, project, outlet, product, qty, image, tanggal, user_id, user_nama);
 
         call.enqueue(new Callback<DailyReport>() {
             @Override

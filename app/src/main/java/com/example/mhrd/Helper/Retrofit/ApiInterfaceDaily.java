@@ -17,5 +17,6 @@ public interface ApiInterfaceDaily {
             @Field("qty") String qty,
             @Field("image") String image,
             @Field("tanggal") String tanggal,
-            @Field("user_id") String user_id);
+            @Field("user_id") String user_id,
+            @Field("user_nama") String user_nama);
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.Admin.Master.Jobs.mJobsActivity">
+    tools:context=".Views.Spv.Master.SpgDailyActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,31 +23,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="text"
-            android:id="@+id/txtLevel"
-            android:visibility="gone"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:layout_centerVertical="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jobs"
+            android:text="Daily Activity"
             android:textSize="20sp"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
             android:fontFamily="@font/allerta_stencil"
             android:layout_marginLeft="45dp"/>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_add"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:onClick="addJobs"/>
 
     </RelativeLayout>
 
@@ -56,6 +38,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/topBar"
         android:layout_marginTop="10dp"
-        android:id="@+id/jobsList"/>
+        android:id="@+id/listDaily"/>
 
 </RelativeLayout>

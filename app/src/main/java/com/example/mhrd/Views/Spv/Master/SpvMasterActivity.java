@@ -2,22 +2,66 @@ package com.example.mhrd.Views.Spv.Master;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.mhrd.R;
+import com.example.mhrd.Views.Admin.Master.Absent.mAbsentActivity;
+import com.example.mhrd.Views.Admin.Master.Employe.mEmployeeActivity;
+import com.example.mhrd.Views.Admin.Master.Jobs.mJobsActivity;
+import com.example.mhrd.Views.Admin.Master.Outlet.mOutletActivity;
 import com.example.mhrd.Views.Spv.Activity.SpvTaskActivity;
 import com.example.mhrd.Views.Spv.SpvMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SpvMasterActivity extends AppCompatActivity {
 
+    CardView cvDaily, cvOutlet, cvAbsen, cvJobs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spv_master);
+
+        cvDaily = findViewById(R.id.card_daily);
+        cvOutlet = findViewById(R.id.card_outlet);
+        cvAbsen = findViewById(R.id.card_absen);
+        cvJobs = findViewById(R.id.card_jobs);
+
+        cvDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                startActivity(new Intent(SpvMasterActivity.this, SpgDailyActivity.class));
+            }
+        });
+
+        cvJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                startActivity(new Intent(SpvMasterActivity.this, mJobsActivity.class));
+            }
+        });
+
+        cvAbsen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SpvMasterActivity.this, mAbsentActivity.class));
+            }
+        });
+
+        cvOutlet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SpvMasterActivity.this, mOutletActivity.class));
+                //
+            }
+        });
 
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);

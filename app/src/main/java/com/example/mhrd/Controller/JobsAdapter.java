@@ -35,10 +35,10 @@ public class JobsAdapter extends ArrayAdapter<JobsData> {
         TextView tvUser = view.findViewById(R.id.c_jobs_user);
 
         tvId.setText(arrayListJobs.get(position).getId());
-        tvBranch.setText(arrayListJobs.get(position).getBranch());
-        tvProject.setText(arrayListJobs.get(position).getProject());
-        tvOutlet.setText(arrayListJobs.get(position).getOutlet());
-        tvUser.setText(arrayListJobs.get(position).getUser_id());
+        tvBranch.setText(arrayListJobs.get(position).getP_name());
+        tvProject.setText(arrayListJobs.get(position).getUser_nama());
+        tvOutlet.setText(arrayListJobs.get(position).getOutlet_name());
+        tvUser.setText(arrayListJobs.get(position).getStart());
 
         return view;
     }

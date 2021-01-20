@@ -58,7 +58,33 @@
                 android:text="Nama Lengkap"
                 android:textColor="@color/teal_200"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/spvNama"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Tanggal"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/spvTgl"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Jam"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:id="@+id/spvJam"/>
 
         </LinearLayout>
 
@@ -88,13 +114,56 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Project Running"
+                android:text="Absent Supervisor"
                 android:textSize="14sp"
                 android:fontFamily="@font/allerta_stencil"
                 android:textColor="@color/teal_200"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_cam_dark"
+                android:id="@+id/imgFoto"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Ambil"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/spvAmbil"
+                android:backgroundTint="@android:color/darker_gray"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/keterangan"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/spvKet"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:id="@+id/spvUpload"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"/>
 
         </LinearLayout>
 

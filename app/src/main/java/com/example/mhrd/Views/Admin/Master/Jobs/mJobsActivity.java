@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,12 +26,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhrd.Controller.BranchAdapter;
 import com.example.mhrd.Controller.JobsAdapter;
+import com.example.mhrd.Helper.SessionManager;
 import com.example.mhrd.Helper.Volley.Server;
 import com.example.mhrd.Models.BranchData;
 import com.example.mhrd.Models.JobsData;
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.example.mhrd.Views.Admin.Master.Branch.mBranchActivity;
+import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
@@ -43,21 +46,27 @@ import java.util.Map;
 
 public class mJobsActivity extends AppCompatActivity {
 
-    ImageView Add;
-    MaterialEditText mtName, mtAddress;
-    Button btCancel, btSimpan;
-    private String InsertAPI = Server.URL_API + "insertBranch.php";
     private String getBranch = Server.URL_API + "getJobs.php";
     JobsAdapter jobsAdapter;
     public static ArrayList<JobsData> jobsDataArrayList = new ArrayList<>();
     JobsData jobsData;
     ListView list;
+    SessionManager sessionManager;
+    String getLevel;
+    TextView tvLevel;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_jobs);
+
+        sessionManager = new SessionManager(this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getLevel = user.get(SessionManager.LEVEL);
+
+        tvLevel = findViewById(R.id.txtLevel);
+        tvLevel.setText(getLevel);
 
 
         list = findViewById(R.id.jobsList);
@@ -105,14 +114,19 @@ public class mJobsActivity extends AppCompatActivity {
         receiveData();
     }
 
-    public void Filter(View view) {
-        receiveData();
-    }
-
     public void back(View view) {
-        startActivity(new Intent(mJobsActivity.this, AdminMasterActivity.class));
-        overridePendingTransition(0,0);
-        jobsDataArrayList.clear();
+//        startActivity(new Intent(mJobsActivity.this, AdminMasterActivity.class));
+//        overridePendingTransition(0,0);
+
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mJobsActivity.this, AdminMasterActivity.class));
+            jobsDataArrayList.clear();
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mJobsActivity.this, SpvMasterActivity.class));
+            jobsDataArrayList.clear();
+        }
     }
 
     public void receiveData(){
@@ -137,20 +151,26 @@ public class mJobsActivity extends AppCompatActivity {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     String id = object.getString("id");
+                                    String p_id = object.getString("p_id");
+                                    String p_name = object.getString("p_name");
                                     String branch = object.getString("branch");
-                                    String project = object.getString("project");
-                                    String outlet = object.getString("outlet");
                                     String user_id = object.getString("user_id");
                                     String user_nama = object.getString("user_nama");
+                                    String telp = object.getString("telp");
+                                    String outlet_id = object.getString("outlet_id");
+                                    String outlet_name = object.getString("outlet_name");
+                                    String alamat = object.getString("alamat");
+                                    String kec = object.getString("kec");
+                                    String kota = object.getString("kota");
+                                    String provinsi = object.getString("provinsi");
                                     String start = object.getString("start");
-                                    String end = object.getString("end");
                                     String status = object.getString("status");
 
                                     if (jsonArray.length() < 1) {
                                         progressDialog.dismiss();
                                         Toast.makeText(mJobsActivity.this, "Maaf Sedang Bermasalah!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        jobsData = new JobsData(id, branch, project, outlet, user_id, user_nama, start, end, status);
+                                        jobsData = new JobsData(id, p_id, p_name, branch, user_id, user_nama, telp, outlet_id, outlet_name, alamat, kec, kota, provinsi, start, status);
                                         jobsDataArrayList.add(jobsData);
                                         jobsAdapter.notifyDataSetChanged();
                                         progressDialog.dismiss();
@@ -223,8 +243,15 @@ public class mJobsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(mJobsActivity.this, AdminMasterActivity.class));
-        overridePendingTransition(0,0);
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mJobsActivity.this, AdminMasterActivity.class));
+            jobsDataArrayList.clear();
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mJobsActivity.this, SpvMasterActivity.class));
+            jobsDataArrayList.clear();
+        }
     }
 
     public void addJobs(View view) {

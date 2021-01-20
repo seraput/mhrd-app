@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,12 +37,15 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.mhrd.Controller.AbsenAdapter;
 import com.example.mhrd.Controller.BranchAdapter;
+import com.example.mhrd.Helper.SessionManager;
 import com.example.mhrd.Helper.Volley.Server;
 import com.example.mhrd.Models.AbsenData;
 import com.example.mhrd.Models.BranchData;
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.example.mhrd.Views.Admin.Master.Branch.mBranchActivity;
+import com.example.mhrd.Views.Admin.Master.Employe.mEmployeeActivity;
+import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.whiteelephant.monthpicker.MonthPickerDialog;
 
@@ -66,6 +70,9 @@ public class mAbsentActivity extends AppCompatActivity {
     ListView list;
     Dialog dialog;
     Button show, close;
+    SessionManager sessionManager;
+    String getLevel;
+    TextView tvLevel;
 
     AbsenAdapter absenAdapter;
     public static ArrayList<AbsenData> absenDataArrayList = new ArrayList<>();
@@ -83,6 +90,13 @@ public class mAbsentActivity extends AppCompatActivity {
         list = findViewById(R.id.absenList);
         imgDate = findViewById(R.id.btDate);
         myCalendar = Calendar.getInstance();
+
+        sessionManager = new SessionManager(this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getLevel = user.get(SessionManager.LEVEL);
+
+        tvLevel = findViewById(R.id.txtLevel);
+        tvLevel.setText(getLevel);
 
         absenAdapter = new AbsenAdapter(mAbsentActivity.this, absenDataArrayList);
         list.setAdapter(absenAdapter);
@@ -132,6 +146,7 @@ public class mAbsentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                imgFoto.setImageBitmap(null);
             }
         });
 
@@ -193,8 +208,19 @@ public class mAbsentActivity extends AppCompatActivity {
     }
 
     public void back(View view) {
-        startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
-        absenDataArrayList.clear();
+//        startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
+//        absenDataArrayList.clear();
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
+            absenDataArrayList.clear();
+
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mAbsentActivity.this, SpvMasterActivity.class));
+            absenDataArrayList.clear();
+
+        }
     }
 
     public void Filter(View view) {
@@ -212,7 +238,14 @@ public class mAbsentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
+//        startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mAbsentActivity.this, AdminMasterActivity.class));
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mAbsentActivity.this, SpvMasterActivity.class));
+        }
     }
 //
     public void receiveAll() {

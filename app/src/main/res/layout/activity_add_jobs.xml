@@ -30,6 +30,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"/>
 
+
     </LinearLayout>
 
     <ScrollView
@@ -61,31 +62,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Select Project"
+                        android:textColor="@color/teal_700"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
 
                         <com.rengwuxian.materialedittext.MaterialEditText
-                            android:layout_width="match_parent"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             app:met_floatingLabel="normal"
                             android:hint="Project Code"
+                            android:enabled="false"
                             android:layout_marginLeft="10dp"
-                            android:id="@+id/project_code"
-                            android:layout_weight="1"/>
+                            android:id="@+id/aj_pCode"/>
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:src="@drawable/ic_cari"
-                            android:layout_gravity="center_vertical"
+                            android:layout_gravity="bottom"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
-                            android:id="@+id/btCari"/>
+                            android:id="@+id/aj_btCari"/>
 
                     </LinearLayout>
 
@@ -93,9 +96,46 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
+                        android:hint="Project Name"
+                        android:enabled="false"
+                        android:id="@+id/aj_pName"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Branch Name"
+                        android:id="@+id/aj_bName"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
                         android:hint="Area"
-                        android:id="@+id/mtArea"
-                        android:layout_margin="10dp"/>
+                        android:id="@+id/aj_area"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Running In"
+                        android:id="@+id/aj_start"
+                        android:enabled="false"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
 
                 </LinearLayout>
 
@@ -124,28 +164,61 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"/>
 
-                    <Spinner
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:id="@+id/spEmploye"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:met_floatingLabel="normal"
+                            android:hint="Employe Code"
+                            android:enabled="false"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/mtEcode"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cari"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/aj_btCode"/>
+
+                    </LinearLayout>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
-                        android:hint="User ID"
-                        android:id="@+id/mtId"
-                        android:layout_margin="5dp"/>
+                        android:hint="Employe Name"
+                        android:id="@+id/mtEname"
+                        android:enabled="false"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
-                        android:hint="Telpon"
-                        android:id="@+id/mtTelp"
+                        android:hint="Employe Email"
+                        android:id="@+id/mtEemail"
+                        android:enabled="false"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:met_floatingLabel="normal"
+                        android:hint="Telp"
+                        android:enabled="false"
+                        android:id="@+id/mtEtelp"
                         android:layout_margin="5dp"/>
 
                 </LinearLayout>
@@ -175,20 +248,39 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"/>
 
-                    <Spinner
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:id="@+id/spOutlet"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:met_floatingLabel="normal"
+                            android:hint="Outlet Code"
+                            android:enabled="false"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/mtOcode"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_cari"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/btOcode"/>
+
+                    </LinearLayout>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
-                        android:hint="Outlet ID"
-                        android:id="@+id/mtName"
+                        android:hint="Outlet Name"
+                        android:id="@+id/mtOname"
+                        android:enabled="false"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"/>
 
@@ -208,7 +300,9 @@
                                 android:layout_height="wrap_content"
                                 app:met_floatingLabel="normal"
                                 android:hint="Kota / Kab"
-                                android:id="@+id/mtKota"
+                                android:id="@+id/mtOkota"
+                                android:enabled="false"
+                                android:textSize="14sp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"/>
 
@@ -219,14 +313,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_weight="1">
+                            android:layout_weight="2">
 
                             <com.rengwuxian.materialedittext.MaterialEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:met_floatingLabel="normal"
                                 android:hint="Kecamatan"
-                                android:id="@+id/mtKec"
+                                android:enabled="false"
+                                android:textSize="14sp"
+                                android:id="@+id/mtOkec"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"/>
 
@@ -239,7 +335,9 @@
                         android:layout_height="wrap_content"
                         app:met_floatingLabel="normal"
                         android:hint="Alamat"
-                        android:id="@+id/mtAlamat"
+                        android:enabled="false"
+                        android:id="@+id/mtOalamat"
+                        android:textSize="14sp"
                         android:inputType="textMultiLine"
                         android:layout_margin="5dp"/>
 
@@ -251,7 +349,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="Simpan"
-                android:id="@+id/btSimpan"
+                android:id="@+id/btnSimpanJobs"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/block_blue"
                 android:layout_gravity="center_horizontal"

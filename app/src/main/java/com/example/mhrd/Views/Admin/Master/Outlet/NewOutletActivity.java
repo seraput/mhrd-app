@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,6 +48,9 @@ public class NewOutletActivity extends AppCompatActivity {
         mtKec = findViewById(R.id.mteKec);
         mtAlamat = findViewById(R.id.mteAlamat);
         simpan = findViewById(R.id.btnSimpan);
+
+
+        mtNama.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override

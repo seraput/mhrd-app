@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhrd.Controller.BranchAdapter;
 import com.example.mhrd.Controller.EmployeAdapter;
+import com.example.mhrd.Helper.SessionManager;
 import com.example.mhrd.Helper.Volley.Server;
 import com.example.mhrd.Models.BranchData;
 import com.example.mhrd.Models.EmployeData;
@@ -26,6 +28,7 @@ import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Master.Absent.mAbsentActivity;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.example.mhrd.Views.Admin.Master.Branch.mBranchActivity;
+import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,11 +45,21 @@ public class mEmployeeActivity extends AppCompatActivity {
     public static ArrayList<EmployeData> employeDataArrayList = new ArrayList<>();
     private String getBranch = Server.URL_API + "getEmploye.php";
     EmployeData employeData;
+    SessionManager sessionManager;
+    String getLevel;
+    TextView tvLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_employee);
+
+        sessionManager = new SessionManager(this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getLevel = user.get(SessionManager.LEVEL);
+
+        tvLevel = findViewById(R.id.txtLevel);
+        tvLevel.setText(getLevel);
 
         listView = findViewById(R.id.karyawanList);
 
@@ -69,7 +82,13 @@ public class mEmployeeActivity extends AppCompatActivity {
     }
 
     public void back(View view) {
-        startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mEmployeeActivity.this, SpvMasterActivity.class));
+        }
     }
 
     public void showAll(View view) {
@@ -81,7 +100,14 @@ public class mEmployeeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
+        final String txtLevel = tvLevel.getText().toString();
+        if (txtLevel.equals("admin")){
+            startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
+        }
+        else if (txtLevel.equals("spv")){
+            startActivity(new Intent(mEmployeeActivity.this, SpvMasterActivity.class));
+        }
+//        startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
     }
 
     public void receiveData(){
