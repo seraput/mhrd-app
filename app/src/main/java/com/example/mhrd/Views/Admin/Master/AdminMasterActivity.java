@@ -5,12 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.AdminMainActivity;
 import com.example.mhrd.Views.Admin.Laporan.AdminLaporanActivity;
@@ -22,12 +30,19 @@ import com.example.mhrd.Views.Admin.Master.Outlet.mOutletActivity;
 import com.example.mhrd.Views.Admin.Master.Project.mProjectActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.example.mhrd.Helper.Volley.Server.URL_PDF;
+
 public class AdminMasterActivity extends AppCompatActivity {
 
     CardView cProject, cEmploye, cOutlet, cAbsen, cBranch, cJobs;
     AlertDialog.Builder builder;
     private long backPressedTime;
     private Toast backToast;
+
+    private String createdData1 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/aktivitas_spv.php";
+    private String createdData2 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_karyawan.php";
+    private String createdData3 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_outlet.php";
+    private String createdData4 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_project.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,15 +127,110 @@ public class AdminMasterActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.laporan:
-                        startActivity(new Intent(getApplicationContext(),
-                                AdminLaporanActivity.class));
-                        overridePendingTransition(0,0);
+                        final ProgressDialog progressDialog = new ProgressDialog(AdminMasterActivity.this);
+                        progressDialog.setMessage("Tunggu Sebentar . . .");
+                        progressDialog.show();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Data4();
+                            }
+                        }, 3000);
                         return true;
                 }
                 return false;
             }
         });
         //End ButtomNav
+    }
+
+
+    private void Data4(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Data1();
+                        Data2();
+                        Data3();
+                        Toast.makeText(AdminMasterActivity.this, "PDF Siap...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),
+                                AdminLaporanActivity.class));
+                        overridePendingTransition(0,0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        progressDialog.dismiss();
+                        Toast.makeText(AdminMasterActivity.this, "Error Connection" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMasterActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data3(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData3,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMasterActivity.this, "Error Connection" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMasterActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data1(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMasterActivity.this, "Error Connection" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMasterActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data2(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData4,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 4", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMasterActivity.this, "Error Connection" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMasterActivity.this);
+        requestQueue.add(request);
     }
 
     @Override

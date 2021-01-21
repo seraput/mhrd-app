@@ -3,6 +3,7 @@ package com.example.mhrd.Views.Spg;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,8 @@ public class SpgMainActivity extends AppCompatActivity {
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
     private long backPressedTime;
     private Toast backToast;
+    ImageView option;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

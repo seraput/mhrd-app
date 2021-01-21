@@ -7,19 +7,30 @@
     tools:context=".Views.Admin.Laporan.AdminLaporanActivity"
     android:background="@drawable/background2">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:background="@android:color/white"
-        android:layout_alignParentTop="true"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Laporan"
-        android:layout_centerInParent="true"/>
+        android:text="Data Laporan"
+        android:textColor="@color/teal_700"
+        android:textSize="24sp"
+        android:fontFamily="@font/allerta_stencil"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/txtLabel"/>
+
+    <View
+        android:layout_width="165dp"
+        android:layout_height="2dp"
+        android:layout_below="@+id/txtLabel"
+        android:layout_marginLeft="20dp"
+        android:background="@color/teal_700"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/RV"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -29,6 +29,7 @@ import com.example.mhrd.Views.Admin.Master.Absent.mAbsentActivity;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.example.mhrd.Views.Admin.Master.Branch.mBranchActivity;
 import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
+import com.example.mhrd.Views.Spv.SpvMainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,7 +88,7 @@ public class mEmployeeActivity extends AppCompatActivity {
             startActivity(new Intent(mEmployeeActivity.this, AdminMasterActivity.class));
         }
         else if (txtLevel.equals("spv")){
-            startActivity(new Intent(mEmployeeActivity.this, SpvMasterActivity.class));
+            startActivity(new Intent(mEmployeeActivity.this, SpvMainActivity.class));
         }
     }
 

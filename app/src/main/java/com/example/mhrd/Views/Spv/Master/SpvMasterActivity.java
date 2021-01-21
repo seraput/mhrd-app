@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Master.Absent.mAbsentActivity;
@@ -21,6 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class SpvMasterActivity extends AppCompatActivity {
 
     CardView cvDaily, cvOutlet, cvAbsen, cvJobs;
+
+    private long backPressedTime;
+    private Toast backToast;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,5 +98,21 @@ public class SpvMasterActivity extends AppCompatActivity {
             }
         });
         //End ButtomNav
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        } else {
+            backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

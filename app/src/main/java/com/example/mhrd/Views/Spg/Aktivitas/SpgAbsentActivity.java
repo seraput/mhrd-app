@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -62,6 +63,9 @@ public class SpgAbsentActivity extends AppCompatActivity {
     Button upload;
     RelativeLayout Ambil;
     Spinner spKet;
+    private long backPressedTime;
+    private Toast backToast;
+    SharedPreferences sharedPreferences;
 
     private static final int CAMERA_PIC_REQUEST = 7;
     Uri imageUri;
@@ -361,5 +365,21 @@ public class SpgAbsentActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        } else {
+            backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

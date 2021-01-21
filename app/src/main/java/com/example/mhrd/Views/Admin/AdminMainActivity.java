@@ -18,8 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhrd.Helper.SessionManager;
 import com.example.mhrd.LoginActivity;
 import com.example.mhrd.R;
@@ -28,6 +36,9 @@ import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.mhrd.Helper.Volley.Server.URL_PDF;
 
 public class AdminMainActivity extends AppCompatActivity {
 
@@ -38,7 +49,14 @@ public class AdminMainActivity extends AppCompatActivity {
     ImageView option;
     Dialog dialog;
     ProgressDialog progressDialog;
-    Button btHelp, btProfile, btLogout, btExit;
+    Button btAddUser, btProfile, btLogout, btExit;
+    String getNama;
+    TextView tvName;
+
+    private String createdData1 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/aktivitas_spv.php";
+    private String createdData2 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_karyawan.php";
+    private String createdData3 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_outlet.php";
+    private String createdData4 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_project.php";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -50,6 +68,10 @@ public class AdminMainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
 
         HashMap<String, String> user = sessionManager.getUserDetail();
+        getNama = user.get(SessionManager.EMAIL);
+
+        tvName = findViewById(R.id.txtName);
+        tvName.setText(getNama);
 
         option = findViewById(R.id.menu);
         dialog = new Dialog(AdminMainActivity.this);
@@ -59,18 +81,10 @@ public class AdminMainActivity extends AppCompatActivity {
         dialog.setCancelable(false);
 //        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
 
-        btHelp = dialog.findViewById(R.id.btBantuan);
         btProfile = dialog.findViewById(R.id.btProfile);
         btLogout = dialog.findViewById(R.id.btLogout);
         btExit = dialog.findViewById(R.id.btCancel);
-
-        btHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Toast.makeText(AdminMainActivity.this, "Bantuan", Toast.LENGTH_SHORT).show();
-            }
-        });
+        btAddUser = dialog.findViewById(R.id.btAddUser);
 
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +93,8 @@ public class AdminMainActivity extends AppCompatActivity {
                 Toast.makeText(AdminMainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
             }
         });
+
+        btAddUser.setVisibility(View.GONE);
 
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,9 +149,16 @@ public class AdminMainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.laporan:
-                        startActivity(new Intent(getApplicationContext(),
-                                AdminLaporanActivity.class));
-                        overridePendingTransition(0,0);
+                        final ProgressDialog progressDialog = new ProgressDialog(AdminMainActivity.this);
+                        progressDialog.setMessage("Tunggu Sebentar . . .");
+                        progressDialog.show();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Data4();
+                            }
+                        }, 3000);
                         return true;
                 }
                 return false;
@@ -163,6 +186,93 @@ public class AdminMainActivity extends AppCompatActivity {
             Logout();
         }
         return true;
+    }
+
+    private void Data4(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Data1();
+                        Data2();
+                        Data3();
+                        Toast.makeText(AdminMainActivity.this, "PDF Siap...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),
+                                AdminLaporanActivity.class));
+                        overridePendingTransition(0,0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        progressDialog.dismiss();
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 1" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data3(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData3,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 2" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data1(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 3" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data2(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData4,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 4", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 4" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
     }
 
     private void Logout(){

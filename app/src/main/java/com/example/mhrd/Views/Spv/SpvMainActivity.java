@@ -1,22 +1,28 @@
 package com.example.mhrd.Views.Spv;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -35,13 +41,9 @@ import com.example.mhrd.Helper.Retrofit.ApiClient;
 import com.example.mhrd.Helper.Retrofit.ApiInterface;
 import com.example.mhrd.Helper.SessionManager;
 import com.example.mhrd.Helper.Volley.Server;
-import com.example.mhrd.MenuTesting;
+import com.example.mhrd.LoginActivity;
 import com.example.mhrd.R;
-import com.example.mhrd.Views.Admin.Laporan.AdminLaporanActivity;
-import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
-import com.example.mhrd.Views.Spg.Aktivitas.SpgAbsentActivity;
-import com.example.mhrd.Views.Spg.SpgMainActivity;
-import com.example.mhrd.Views.Spg.Task.SpgTugasActivity;
+import com.example.mhrd.Views.Admin.Master.Employe.mEmployeeActivity;
 import com.example.mhrd.Views.Spv.Activity.SpvTaskActivity;
 import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -67,6 +69,10 @@ public class SpvMainActivity extends AppCompatActivity {
     TextView tvNama, tvTanggal, tvJam;
     String getId, getProjectId, getProject, getNama;
 
+    private long backPressedTime;
+    private Toast backToast;
+    SharedPreferences sharedPreferences;
+
     private static final int CAMERA_PIC_REQUEST = 7;
     Uri imageUri;
     String myFormat = "dd MMMM yyyy";
@@ -78,7 +84,11 @@ public class SpvMainActivity extends AppCompatActivity {
     SessionManager sessionManager;
     private String masuk = Server.URL_API + "update_masuk.php";
     private String pulang = Server.URL_API + "update_pulang.php";
+    ImageView option;
+    Dialog dialog;
+    Button btAddUser, btProfile, btLogout, btExit;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,14 +98,70 @@ public class SpvMainActivity extends AppCompatActivity {
         tvJam = findViewById(R.id.spvJam);
         tvNama = findViewById(R.id.spvNama);
 
+        option = findViewById(R.id.menu);
+        dialog = new Dialog(SpvMainActivity.this);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.bg));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        btProfile = dialog.findViewById(R.id.btProfile);
+        btLogout = dialog.findViewById(R.id.btLogout);
+        btExit = dialog.findViewById(R.id.btCancel);
+        btAddUser = dialog.findViewById(R.id.btAddUser);
+
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
+        sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
         getId = user.get(SessionManager.ID);
         getProjectId = user.get(SessionManager.PROJECTID);
         getProject = user.get(SessionManager.PROJECT);
         getNama = user.get(SessionManager.EMAIL);
 
         tvNama.setText(getNama);
+
+        btProfile.setVisibility(View.GONE);
+
+        btAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SpvMainActivity.this, mEmployeeActivity.class));
+                overridePendingTransition(0,0);
+            }
+        });
+
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Handler handler = new Handler();
+                final ProgressDialog progressDialog = new ProgressDialog(SpvMainActivity.this);
+                progressDialog.setTitle("Terimakasih");
+                progressDialog.setMessage("Tunggu Sebentar . . .");
+                progressDialog.show();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        Logo();
+                    }
+
+                }, 3000);
+            }
+        });
+
+        btExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        option.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
 
         //Set Tanggal
         Calendar c1 = Calendar.getInstance();
@@ -367,8 +433,29 @@ public class SpvMainActivity extends AppCompatActivity {
 
     }
 
-    public void back(View view) {
-        startActivity(new Intent(SpvMainActivity.this, MenuTesting.class));
-        overridePendingTransition(0,0);
+    private void Logo(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getResources().getString(R.string.prefLoginState),"LoggedOut");
+        editor.apply();
+        Intent i = new Intent(SpvMainActivity.this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        } else {
+            backToast = Toast.makeText(this, "Tekan Lagi Untuk Keluar", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

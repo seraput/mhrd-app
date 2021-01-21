@@ -4,8 +4,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
     tools:context=".Views.Spv.Activity.SpvTaskActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/top">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/top"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="30sp"
+        android:id="@+id/greet">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Nama Lengkap"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/spvNama"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Tanggal"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/spvTgl"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Jam"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:id="@+id/spvJam"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/contrail_one"
+                android:text="Jam"
+                android:textColor="@color/teal_200"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:id="@+id/spvID"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/dash3"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/greet"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="12dp"
+        android:id="@+id/card_menu">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity Supervisor"
+                android:textSize="14sp"
+                android:fontFamily="@font/allerta_stencil"
+                android:textColor="@color/teal_200"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_cam_dark"
+                android:id="@+id/imgFoto"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Ambil"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/spvAmbil"
+                android:backgroundTint="@android:color/darker_gray"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/ket"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/spvKet"/>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:id="@+id/spvUpload"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

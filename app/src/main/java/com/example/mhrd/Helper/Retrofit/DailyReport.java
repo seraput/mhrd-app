@@ -24,6 +24,8 @@ public class DailyReport {
     private String tanggal;
     @SerializedName("user_id")
     private String user_id;
+    @SerializedName("user_nama")
+    private String user_nama;
     @SerializedName("value")
     private String value;
     @SerializedName("message")
@@ -107,6 +109,14 @@ public class DailyReport {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getUser_nama() {
+        return user_nama;
+    }
+
+    public void setUser_nama(String user_nama) {
+        this.user_nama = user_nama;
     }
 
     public String getValue() {

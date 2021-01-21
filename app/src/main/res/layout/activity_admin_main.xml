@@ -56,6 +56,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/contrail_one"
                 android:text="Nama Lengkap"
+                android:id="@+id/txtName"
                 android:textColor="@color/teal_200"
                 android:textSize="20sp"
                 android:textStyle="bold" />

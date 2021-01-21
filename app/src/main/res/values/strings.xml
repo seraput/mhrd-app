@@ -9,6 +9,14 @@
         <item>Pulang</item>
     </string-array>
 
+    <string-array name="ket">
+        <item>Pilih</item>
+        <item>Meeting</item>
+        <item>Visit Outlet</item>
+        <item>Training</item>
+        <item>Lainnya</item>
+    </string-array>
+
     <string-array name="status">
         <item>Pilih</item>
         <item>Active</item>

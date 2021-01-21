@@ -42,21 +42,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="Bantuan"
+                    android:text="Profile"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/teal_700"
+                    android:visibility="visible"
                     android:textSize="18sp"
-                    android:id="@+id/btBantuan"/>
-
+                    android:id="@+id/btProfile"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="Profile"
+                    android:text="Tambah User"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/teal_700"
+                    android:visibility="visible"
                     android:textSize="18sp"
-                    android:id="@+id/btProfile"/>
+                    android:id="@+id/btAddUser"/>
 
 
                 <Button
