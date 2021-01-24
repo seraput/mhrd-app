@@ -121,12 +121,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
-                    android:hint="User Id"
-                    android:id="@+id/tugas_user"
+                    android:hint="Tanggal"
+                    android:id="@+id/tugas_jam"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:visibility="gone"/>
+
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
@@ -134,6 +135,7 @@
                     app:met_floatingLabel="normal"
                     android:hint="Jobs ID"
                     android:id="@+id/tugas_jobs"
+                    android:enabled="false"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
@@ -145,6 +147,7 @@
                     app:met_floatingLabel="normal"
                     android:hint="Branch"
                     android:id="@+id/tugas_branch"
+                    android:enabled="false"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"/>
@@ -154,6 +157,7 @@
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
                     android:hint="Project"
+                    android:enabled="false"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -164,6 +168,7 @@
                     android:layout_height="wrap_content"
                     app:met_floatingLabel="normal"
                     android:hint="Outlet"
+                    android:enabled="false"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"

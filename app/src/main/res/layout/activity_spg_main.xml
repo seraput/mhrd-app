@@ -95,50 +95,113 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_centerInParent="true">
+                    android:layout_above="@+id/bt_simpan">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User ID"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/allerta_stencil"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
+                        android:layout_marginLeft="30dp"
                         android:id="@+id/txtId"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="18sp"
+                        android:textColor="@color/teal_700"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User Name"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/allerta_stencil"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
                         android:id="@+id/txtNama2"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="18sp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:textColor="@color/teal_700"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Branch"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/allerta_stencil"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
                         android:id="@+id/txtBranch"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginLeft="30dp"
+                        android:textColor="@color/teal_700"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Project ID"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/allerta_stencil"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
                         android:id="@+id/txtProjectID"
-                        android:layout_marginTop="10dp"/>
+                        android:textSize="18sp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:textColor="@color/teal_700"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="30dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Project Name"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/allerta_stencil"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nama"
+                        android:textColor="@color/teal_700"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="30dp"
                         android:id="@+id/txtProjectName"
-                        android:layout_marginTop="10dp"/>
+                        android:layout_marginTop="5dp"/>
 
                 </LinearLayout>
 
@@ -148,6 +211,7 @@
                     android:background="@drawable/block_light"
                     android:text="Logout"
                     android:onClick="back"
+                    android:id="@+id/bt_simpan"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"/>
 

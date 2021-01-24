@@ -59,12 +59,14 @@ public class SpgTugasActivity extends AppCompatActivity {
     Uri imageUri;
     //    private String updateBarang = Api.URL_API + "updatePeminjaman.php";
     String myFormat = "dd MMMM yyyy";
+    String myFormat2 = "HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+    SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2);
     private Bitmap bitmap;
     ApiInterfaceDaily apiInterface;
     SessionManager sessionManager;
-    private String getJobs = Server.URL_API + "getJobs.php";
-    MaterialEditText tvBranch, tvProject, tvOutlet, tvJobsID, tvTgl, tvProduct, tvQty, tvID;
+    private String getJobs = Server.URL_API + "getJobs2.php";
+    MaterialEditText tvBranch, tvProject, tvOutlet, tvJobsID, tvTgl, tvProduct, tvQty, tvJam;
     Button btKirim, btAmbil;
     ImageView imgFoto;
 
@@ -92,13 +94,11 @@ public class SpgTugasActivity extends AppCompatActivity {
         tvJobsID = findViewById(R.id.tugas_jobs);
         tvQty = findViewById(R.id.tugas_qty);
         tvTgl = findViewById(R.id.tugas_tanggal);
-        tvID = findViewById(R.id.tugas_user);
+        tvJam = findViewById(R.id.tugas_jam);
 
         btAmbil = findViewById(R.id.tugas_take);
         btKirim = findViewById(R.id.tugas_kirim);
         imgFoto = findViewById(R.id.tugas_gambar);
-
-        tvID.setText(getId);
 
         btAmbil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +113,6 @@ public class SpgTugasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // upload data
                 String txtTgl = tvTgl.getText().toString();
-                String txtuID = tvID.getText().toString();
                 String txtJobs = tvJobsID.getText().toString();
                 String txtbranch = tvBranch.getText().toString();
                 String txtProj = tvProject.getText().toString();
@@ -122,7 +121,7 @@ public class SpgTugasActivity extends AppCompatActivity {
                 String txtQty = tvQty.getText().toString();
 
                 if (txtbranch.isEmpty() || txtJobs.isEmpty() || txtOutlet.isEmpty() || txtProd.isEmpty()
-                || txtProj.isEmpty() || txtTgl.isEmpty() || txtuID.isEmpty() || txtQty.isEmpty()){
+                || txtProj.isEmpty() || txtTgl.isEmpty() || txtQty.isEmpty()){
                     Toast.makeText(SpgTugasActivity.this, "Lengkapi Data!", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -162,9 +161,16 @@ public class SpgTugasActivity extends AppCompatActivity {
         //End ButtomNav
 
         //Set Tanggal
+//        Calendar c1 = Calendar.getInstance();
+//        String str1 = sdf.format(c1.getTime());
+//        tvTgl.setText(str1);
+
+        //Set Tanggal
         Calendar c1 = Calendar.getInstance();
         String str1 = sdf.format(c1.getTime());
+        String str2 = sdf2.format(c1.getTime());
         tvTgl.setText(str1);
+        tvJam.setText(str2);
     }
 
     private void getUserDetail(){
@@ -189,14 +195,14 @@ public class SpgTugasActivity extends AppCompatActivity {
 
                                     JSONObject object = jsonArray.getJSONObject(i);
 
-                                    String strId = object.getString("id").trim();
+                                    String strID = object.getString("id").trim();
+                                    String strPname = object.getString("p_id").trim();
+                                    String strOutlet = object.getString("outlet_name").trim();
                                     String strBranch = object.getString("branch").trim();
-                                    String strProject = object.getString("project").trim();
-                                    String strOutlet = object.getString("outlet").trim();
 
-                                    tvJobsID.setText(strId);
+                                    tvJobsID.setText(strID);
                                     tvBranch.setText(strBranch);
-                                    tvProject.setText(strProject);
+                                    tvProject.setText(strPname);
                                     tvOutlet.setText(strOutlet);
                                 }
                             }
@@ -246,7 +252,8 @@ public class SpgTugasActivity extends AppCompatActivity {
         String qty = tvQty.getText().toString();
         String image = null;
         String tanggal = tvTgl.getText().toString();
-        String user_id = tvID.getText().toString();
+        String jam = tvJam.getText().toString();
+        String user_id = getId;
         String user_nama = getNama;
         if (bitmap == null) {
             image = "";
@@ -256,7 +263,7 @@ public class SpgTugasActivity extends AppCompatActivity {
 
         apiInterface = ApiClient.getApiClient().create(ApiInterfaceDaily.class);
 
-        Call<DailyReport> call = apiInterface.insertData(key, jobs_id, branch, project, outlet, product, qty, image, tanggal, user_id, user_nama);
+        Call<DailyReport> call = apiInterface.insertData(key, jobs_id, branch, project, outlet, product, qty, image, tanggal, jam, user_id, user_nama);
 
         call.enqueue(new Callback<DailyReport>() {
             @Override

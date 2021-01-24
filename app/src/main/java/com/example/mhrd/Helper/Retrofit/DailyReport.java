@@ -22,6 +22,8 @@ public class DailyReport {
     private String image;
     @SerializedName("tanggal")
     private String tanggal;
+    @SerializedName("jam")
+    private String jam;
     @SerializedName("user_id")
     private String user_id;
     @SerializedName("user_nama")
@@ -101,6 +103,14 @@ public class DailyReport {
 
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
+    }
+
+    public String getJam() {
+        return jam;
+    }
+
+    public void setJam(String jam) {
+        this.jam = jam;
     }
 
     public String getUser_id() {
