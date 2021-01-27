@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -63,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         btLogin = findViewById(R.id.btn_login);
         loginstate = findViewById(R.id.state);
 
+        final MediaPlayer mpgreet = MediaPlayer.create(this, R.raw.welcome);
+
         String loginstatus = sharedPreferences.getString(getResources().getString(R.string.prefLoginState),"");
         if (loginstatus.equals("LoggedIn")){
             startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
@@ -114,7 +117,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginProces(final String email, final String password) {
-//        final MediaPlayer mpmulai = MediaPlayer.create(this, R.raw.berhasil);
+        final MediaPlayer mpberhasil = MediaPlayer.create(this, R.raw.berhasil);
+        final MediaPlayer mpgagal = MediaPlayer.create(this, R.raw.gagal);
+
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         final Handler handler = new Handler();
         progressDialog.setCancelable(false);
@@ -160,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if (level.equals("admin")) {
                                                 sessionManager.createSession(id, email, nama, branch, projectId, project, level);
                                                 editor.apply();
+                                                mpberhasil.start();
                                                 final Intent inte = new Intent(LoginActivity.this, AdminMainActivity.class);
                                                 inte.putExtra("email", email);
                                                 inte.putExtra("nama", nama);
@@ -169,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                                             }else if (level.equals("spg")){
                                                 sessionManager.createSession(id, email, nama, branch, projectId, project, level);
                                                 editor.apply();
+                                                mpberhasil.start();
                                                 final Intent in = new Intent(LoginActivity.this, SpgMainActivity.class);
                                                 in.putExtra("email", email);
                                                 in.putExtra("nama", nama);
@@ -179,6 +186,7 @@ public class LoginActivity extends AppCompatActivity {
                                             else if (level.equals("spv")){
                                                 sessionManager.createSession(id, email, nama, branch, projectId, project, level);
                                                 editor.apply();
+                                                mpberhasil.start();
                                                 final Intent on = new Intent(LoginActivity.this, SpvMainActivity.class);
                                                 on.putExtra("email", email);
                                                 on.putExtra("nama", nama);
@@ -194,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     progressDialog.dismiss();
+                                    mpgagal.start();
                                     Toast.makeText(LoginActivity.this, "Error, Email Or Password", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -202,6 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 progressDialog.dismiss();
+                                mpgagal.start();
                                 Toast.makeText(LoginActivity.this, "Error, Check Connection" +error.toString(), Toast.LENGTH_SHORT).show();
                             }
                         })

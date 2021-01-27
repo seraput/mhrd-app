@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -146,7 +147,8 @@ public class SpvTaskActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading....");
         progressDialog.show();
-
+        final MediaPlayer mpdashoard = MediaPlayer.create(this, R.raw.berhasil);
+        final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.gagal);
         String userId = tvID.getText().toString();
         String userNama = tvName.getText().toString();
         String tanggal = tvTgl.getText().toString();
@@ -176,11 +178,13 @@ public class SpvTaskActivity extends AppCompatActivity {
 
                 if (value.equals("1")) {
                     Toast.makeText(SpvTaskActivity.this, "Berhasil!", Toast.LENGTH_SHORT).show();
+                    mpdashoard.start();
                     startActivity(new Intent(SpvTaskActivity.this, SpvTaskActivity.class));
                     overridePendingTransition(0,0);
 //                    SaveEditDetail();
                 } else {
                     Toast.makeText(SpvTaskActivity.this, message, Toast.LENGTH_SHORT).show();
+                    mplaporan.start();
                 }
 
             }
@@ -189,6 +193,7 @@ public class SpvTaskActivity extends AppCompatActivity {
             public void onFailure(Call<Absent> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(SpvTaskActivity.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                mplaporan.start();
             }
         });
 

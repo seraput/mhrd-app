@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,6 +73,9 @@ public class AdminMainActivity extends AppCompatActivity {
 
         tvName = findViewById(R.id.txtName);
         tvName.setText(getNama);
+
+        final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
+        final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.laporan);
 
         option = findViewById(R.id.menu);
         dialog = new Dialog(AdminMainActivity.this);
@@ -145,11 +149,13 @@ public class AdminMainActivity extends AppCompatActivity {
                     case R.id.master:
                         startActivity(new Intent(getApplicationContext(),
                                 AdminMasterActivity.class));
+                        mpmaster.start();
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.laporan:
                         final ProgressDialog progressDialog = new ProgressDialog(AdminMainActivity.this);
+                        mplaporan.start();
                         progressDialog.setMessage("Tunggu Sebentar . . .");
                         progressDialog.show();
                         final Handler handler = new Handler();

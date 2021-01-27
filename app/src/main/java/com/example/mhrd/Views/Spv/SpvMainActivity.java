@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -122,6 +123,9 @@ public class SpvMainActivity extends AppCompatActivity {
 
         btProfile.setVisibility(View.GONE);
 
+//        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.);
+        final MediaPlayer mpberhasil = MediaPlayer.create(this, R.raw.berhasil);
+
         btAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +146,7 @@ public class SpvMainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         dialog.dismiss();
+                        mpberhasil.start();
                         Logo();
                     }
 
@@ -234,11 +239,13 @@ public class SpvMainActivity extends AppCompatActivity {
         //End ButtomNav
     }
 
+
     private void postData(final String key) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading....");
         progressDialog.show();
-
+        final MediaPlayer mpdashoard = MediaPlayer.create(this, R.raw.berhasil);
+        final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.gagal);
         String userId = getId;
         String userNama = tvNama.getText().toString();
         String projectId = getProjectId;
@@ -270,11 +277,13 @@ public class SpvMainActivity extends AppCompatActivity {
 
                 if (value.equals("1")) {
                     Toast.makeText(SpvMainActivity.this, "Berhasil!", Toast.LENGTH_SHORT).show();
+                    mpdashoard.start();
                     startActivity(new Intent(SpvMainActivity.this, SpvMainActivity.class));
                     overridePendingTransition(0,0);
 //                    SaveEditDetail();
                 } else {
                     Toast.makeText(SpvMainActivity.this, message, Toast.LENGTH_SHORT).show();
+                    mplaporan.start();
                 }
 
             }
@@ -282,6 +291,7 @@ public class SpvMainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Absent> call, Throwable t) {
                 progressDialog.dismiss();
+                mplaporan.start();
                 Toast.makeText(SpvMainActivity.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });

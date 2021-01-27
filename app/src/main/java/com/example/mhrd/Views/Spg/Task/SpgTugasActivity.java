@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -243,7 +244,8 @@ public class SpgTugasActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading....");
         progressDialog.show();
-
+        final MediaPlayer mpdashoard = MediaPlayer.create(this, R.raw.berhasil);
+        final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.gagal);
         String jobs_id = tvJobsID.getText().toString();
         String branch = tvBranch.getText().toString();
         String project = tvProject.getText().toString();
@@ -278,8 +280,10 @@ public class SpgTugasActivity extends AppCompatActivity {
 
                 if (value.equals("1")) {
                     startActivity(new Intent(SpgTugasActivity.this, SpgTugasActivity.class));
+                    mpdashoard.start();
                     Toast.makeText(SpgTugasActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
+                    mplaporan.start();
                     Toast.makeText(SpgTugasActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
 
@@ -288,6 +292,7 @@ public class SpgTugasActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<DailyReport> call, Throwable t) {
                 progressDialog.dismiss();
+                mplaporan.start();
                 Toast.makeText(SpgTugasActivity.this, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });

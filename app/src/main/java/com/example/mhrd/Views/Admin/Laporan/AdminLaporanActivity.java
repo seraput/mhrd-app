@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,9 @@ public class AdminLaporanActivity extends AppCompatActivity {
         PDFAdapter adapter = new PDFAdapter(list,this,itemClickListener);
         recyclerView.setAdapter(adapter);
 
+        final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.laporan);
@@ -68,12 +72,14 @@ public class AdminLaporanActivity extends AppCompatActivity {
                     case R.id.dashboard:
                         startActivity(new Intent(getApplicationContext(),
                                 AdminMainActivity.class));
+                        mpdashboard.start();
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id.master:
                         startActivity(new Intent(getApplicationContext(),
                                 AdminMasterActivity.class));
+                        mpmaster.start();
                         overridePendingTransition(0,0);
                         return true;
 

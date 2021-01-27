@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MHRD">
-        <activity android:name=".Views.Admin.Laporan.PDFViewActivity"></activity>
+        <activity android:name=".Testing.GetCountValue"></activity>
+        <activity android:name=".Views.Admin.Laporan.PDFViewActivity" />
         <activity android:name=".Views.Admin.Laporan.PDFActivity" />
         <activity android:name=".Views.Spv.Master.SpgDailyActivity" />
         <activity android:name=".Views.Spv.Master.SpvMasterActivity" />

@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -56,10 +57,21 @@ public class AdminMasterActivity extends AppCompatActivity {
         cBranch = findViewById(R.id.card_branch);
         cJobs = findViewById(R.id.card_jobs);
 
+        final MediaPlayer mpdashoard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.laporan);
+
+        final MediaPlayer mpbranch = MediaPlayer.create(this, R.raw.branch);
+        final MediaPlayer mpproject = MediaPlayer.create(this, R.raw.project);
+        final MediaPlayer mpoutlet = MediaPlayer.create(this, R.raw.outlet);
+        final MediaPlayer mpemploye = MediaPlayer.create(this, R.raw.employe);
+        final MediaPlayer mpjobs = MediaPlayer.create(this, R.raw.jobs);
+        final MediaPlayer mpabsen = MediaPlayer.create(this, R.raw.absensi);
+
         cBranch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mBranchActivity.class));
+                mpbranch.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -68,6 +80,7 @@ public class AdminMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mProjectActivity.class));
+                mpproject.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -77,6 +90,7 @@ public class AdminMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mAbsentActivity.class));
+                mpabsen.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -86,6 +100,7 @@ public class AdminMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mOutletActivity.class));
+                mpoutlet.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -95,6 +110,7 @@ public class AdminMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mEmployeeActivity.class));
+                mpemploye.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -103,6 +119,7 @@ public class AdminMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AdminMasterActivity.this, mJobsActivity.class));
+                mpjobs.start();
                 overridePendingTransition(0,0);
             }
         });
@@ -117,6 +134,7 @@ public class AdminMasterActivity extends AppCompatActivity {
                     case R.id.dashboard:
                         startActivity(new Intent(getApplicationContext(),
                                 AdminMainActivity.class));
+                        mpdashoard.start();
                         overridePendingTransition(0,0);
                         return true;
 
@@ -129,6 +147,7 @@ public class AdminMasterActivity extends AppCompatActivity {
                     case R.id.laporan:
                         final ProgressDialog progressDialog = new ProgressDialog(AdminMasterActivity.this);
                         progressDialog.setMessage("Tunggu Sebentar . . .");
+                        mplaporan.start();
                         progressDialog.show();
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
