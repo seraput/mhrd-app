@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         loginstate = findViewById(R.id.state);
 
         final MediaPlayer mpgreet = MediaPlayer.create(this, R.raw.welcome);
+        mpgreet.start();
 
         String loginstatus = sharedPreferences.getString(getResources().getString(R.string.prefLoginState),"");
         if (loginstatus.equals("LoggedIn")){
