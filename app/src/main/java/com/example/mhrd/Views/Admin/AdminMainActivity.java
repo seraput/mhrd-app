@@ -30,11 +30,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhrd.Helper.SessionManager;
+import com.example.mhrd.Helper.Volley.Server;
 import com.example.mhrd.LoginActivity;
+import com.example.mhrd.Models.JobsData;
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Laporan.AdminLaporanActivity;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
+import com.example.mhrd.Views.Admin.Master.Jobs.mJobsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,21 +50,28 @@ import static com.example.mhrd.Helper.Volley.Server.URL_PDF;
 
 public class AdminMainActivity extends AppCompatActivity {
 
+
+    private String createdData1 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/aktivitas_spv.php";
+    private String createdData2 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_karyawan.php";
+    private String createdData3 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_outlet.php";
+    private String createdData4 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_project.php";
+    private String createdData5 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/karyawan_on_project.php";
+    private String createdData6 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/report_activity.php";
+
+
     private long backPressedTime;
     private Toast backToast;
     SharedPreferences sharedPreferences;
     SessionManager sessionManager;
     ImageView option;
     Dialog dialog;
-    ProgressDialog progressDialog;
     Button btAddUser, btProfile, btLogout, btExit;
-    String getNama;
-    TextView tvName;
-
-    private String createdData1 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/aktivitas_spv.php";
-    private String createdData2 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_karyawan.php";
-    private String createdData3 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_outlet.php";
-    private String createdData4 = "https://mydbskripsi.000webhostapp.com/hrd-pdf/pdf/data_project.php";
+    String getNama, getJobs, getProject, getEmploye, getOutlet;
+    TextView tvName, tvJobs, tvProject, tvOutlet, tvEmploye;
+    private String countJobs = Server.URL_API + "getJobs.php";
+    private String countProject = Server.URL_API + "getProjectAll.php";
+    private String countOutlet = Server.URL_API + "getOutlet.php";
+    private String countEmploye = Server.URL_API + "getEmploye.php";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -74,6 +88,11 @@ public class AdminMainActivity extends AppCompatActivity {
         tvName = findViewById(R.id.txtName);
         tvName.setText(getNama);
 
+        tvJobs = findViewById(R.id.jobsrun);
+        tvEmploye = findViewById(R.id.employerun);
+        tvOutlet = findViewById(R.id.outletrun);
+        tvProject = findViewById(R.id.projectrun);
+
         final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
         final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.laporan);
 
@@ -89,6 +108,8 @@ public class AdminMainActivity extends AppCompatActivity {
         btLogout = dialog.findViewById(R.id.btLogout);
         btExit = dialog.findViewById(R.id.btCancel);
         btAddUser = dialog.findViewById(R.id.btAddUser);
+
+        getCountJobs();
 
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +183,7 @@ public class AdminMainActivity extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Data4();
+                                Data6();
                             }
                         }, 3000);
                         return true;
@@ -194,18 +215,67 @@ public class AdminMainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void Data6(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData6,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                        Data1();
+                        Data2();
+                        Data3();
+                        Data4();
+                        Data5();
+                        Toast.makeText(AdminMainActivity.this, "PDF Siap...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),
+                                AdminLaporanActivity.class));
+                        overridePendingTransition(0,0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 2" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
+    private void Data5(){
+        StringRequest request = new StringRequest(Request.Method.POST, createdData5,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(AdmDashboardActivity.this, "Laporan 3", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, "Error Connection 2" + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        progressDialog.dismiss();
+                    }
+                }
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
     private void Data4(){
         StringRequest request = new StringRequest(Request.Method.POST, createdData1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Data1();
-                        Data2();
-                        Data3();
-                        Toast.makeText(AdminMainActivity.this, "PDF Siap...", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),
-                                AdminLaporanActivity.class));
-                        overridePendingTransition(0,0);
+//                        Data1();
+//                        Data2();
+//                        Data3();
+//                        Toast.makeText(AdminMainActivity.this, "PDF Siap...", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(getApplicationContext(),
+//                                AdminLaporanActivity.class));
+//                        overridePendingTransition(0,0);
                     }
                 },
                 new Response.ErrorListener() {
@@ -278,6 +348,208 @@ public class AdminMainActivity extends AppCompatActivity {
                 }
         );
         RequestQueue requestQueue = Volley.newRequestQueue(AdminMainActivity.this);
+        requestQueue.add(request);
+    }
+
+    public void getCountJobs(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sedang Memuat Data . . .");
+        progressDialog.show();
+        String txtstat = "Active";
+
+        StringRequest request = new StringRequest(Request.Method.POST, countJobs,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String sucess = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (sucess.equals("1")){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+//                                    JSONObject object = jsonArray.getJSONObject(i);
+                                    System.out.println("Nilai " + jsonArray.length());
+                                    int z = jsonArray.length();
+                                    getJobs = String.valueOf(z);
+                                    getCountEmploye();
+                                    getCountOutlet();
+                                    getCountProject();
+
+//                                    Toast.makeText(AdminMainActivity.this, "nilai "+getJobs, Toast.LENGTH_SHORT).show();
+                                    tvJobs.setText(getJobs);
+                                    progressDialog.dismiss();
+
+                                }
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", txtstat);
+//                params.put("status", status);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+
+    public void getCountProject(){
+        String txtstat = "Active";
+
+        StringRequest request = new StringRequest(Request.Method.POST, countProject,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String sucess = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (sucess.equals("1")){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+
+                                    int z = jsonArray.length();
+                                    getProject = String.valueOf(z);
+                                    System.out.println(getProject);
+                                    tvProject.setText(getProject);
+                                }
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", txtstat);
+//                params.put("status", status);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+
+    public void getCountOutlet(){
+        String txtstat = "Active";
+
+        StringRequest request = new StringRequest(Request.Method.POST, countOutlet,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String sucess = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (sucess.equals("1")){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+//                                    JSONObject object = jsonArray.getJSONObject(i);
+                                    int z = jsonArray.length();
+                                    getOutlet = String.valueOf(z);
+
+                                    tvOutlet.setText(getOutlet);
+
+                                }
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", txtstat);
+//                params.put("status", status);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+
+    public void getCountEmploye(){
+        String txtstat = "Active";
+
+        StringRequest request = new StringRequest(Request.Method.POST, countEmploye,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String sucess = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (sucess.equals("1")){
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    int z = jsonArray.length();
+                                    getEmploye = String.valueOf(z);
+
+//                                    Toast.makeText(AdminMainActivity.this, "nilai "+getJobs, Toast.LENGTH_SHORT).show();
+                                    tvEmploye.setText(getEmploye);
+
+                                }
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(AdminMainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", txtstat);
+//                params.put("status", status);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
     }
 

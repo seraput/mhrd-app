@@ -44,6 +44,8 @@ public class AdminLaporanActivity extends AppCompatActivity {
         list.add(new PDFModel("Data_Project", "https://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataProject.pdf"));
         list.add(new PDFModel("Aktivitas_Spv", "https://mydbskripsi.000webhostapp.com/hrd-pdf/files/aktivitasSPV.pdf"));
         list.add(new PDFModel("Data_Karyawan", "https://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataKaryawan.pdf"));
+        list.add(new PDFModel("Report_Activity", "https://mydbskripsi.000webhostapp.com/hrd-pdf/files/reportActivity.pdf"));
+        list.add(new PDFModel("Karyawan_On_Project", "https://mydbskripsi.000webhostapp.com/hrd-pdf/files/karyawanOnProject.pdf"));
 
         recyclerView.setLayoutManager(new GridLayoutManager(AdminLaporanActivity.this, 2));
 

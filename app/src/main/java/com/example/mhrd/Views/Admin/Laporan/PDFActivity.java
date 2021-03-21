@@ -128,6 +128,28 @@ public class PDFActivity extends AppCompatActivity {
                         }
                     }, 2000);
                 }
+                else if (title.equals("Report_Activity")){
+                    DownloadBooks("ttps://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataKaryawan.pdf","Report_Activity");
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            startActivity(new Intent(PDFActivity.this, AdminLaporanActivity.class));
+                            Toast.makeText(PDFActivity.this, "Downloading...", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 2000);
+                }
+                else if (title.equals("Karyawan_On_Proect")){
+                    DownloadBooks("ttps://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataKaryawan.pdf","Karyawan_On_Project");
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            startActivity(new Intent(PDFActivity.this, AdminLaporanActivity.class));
+                            Toast.makeText(PDFActivity.this, "Downloading...", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 2000);
+                }
             }
         });
     }

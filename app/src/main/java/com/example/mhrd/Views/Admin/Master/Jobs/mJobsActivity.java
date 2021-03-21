@@ -173,6 +173,7 @@ public class mJobsActivity extends AppCompatActivity {
                                         jobsData = new JobsData(id, p_id, p_name, branch, user_id, user_nama, telp, outlet_id, outlet_name, alamat, kec, kota, provinsi, start, status);
                                         jobsDataArrayList.add(jobsData);
                                         jobsAdapter.notifyDataSetChanged();
+                                        System.out.println("Nilai " + jsonArray.length());
                                         progressDialog.dismiss();
                                     }
                                 }
