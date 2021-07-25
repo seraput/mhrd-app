@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,11 @@ public class SpvMasterActivity extends AppCompatActivity {
         cvOutlet = findViewById(R.id.card_outlet);
         cvAbsen = findViewById(R.id.card_absen);
         cvJobs = findViewById(R.id.card_jobs);
+
+
+        final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.aktivitas);
 
         cvDaily.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +86,7 @@ public class SpvMasterActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpvMainActivity.class));
                         overridePendingTransition(0,0);
+                        mpdashboard.start();
                         return true;
 
                     case R.id.master:
@@ -92,6 +99,7 @@ public class SpvMasterActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpvTaskActivity.class));
                         overridePendingTransition(0,0);
+                        mpaktivitas.start();
                         return true;
                 }
                 return false;

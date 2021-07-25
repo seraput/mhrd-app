@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -71,6 +72,11 @@ public class SpgMainActivity extends AppCompatActivity {
         tvPid.setText(getProjectID);
         tvPnama.setText(getProject);
 
+
+        final MediaPlayer mpabsen = MediaPlayer.create(this, R.raw.absensi);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.aktivitas);
+
         //ButtomNav
         BottomNavigationView bottomNavigationView = findViewById(R.id.buttom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.dashboard);
@@ -87,12 +93,14 @@ public class SpgMainActivity extends AppCompatActivity {
                     case R.id.aktivitas:
                         startActivity(new Intent(getApplicationContext(),
                                 SpgAbsentActivity.class));
+                        mpabsen.start();
                         overridePendingTransition(0,0);
                         return true;
 
                     case R.id. history:
                         startActivity(new Intent(getApplicationContext(),
                                 SpgTugasActivity.class));
+                        mpaktivitas.start();
                         overridePendingTransition(0,0);
                         return true;
                 }

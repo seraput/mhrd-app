@@ -101,6 +101,11 @@ public class SpgTugasActivity extends AppCompatActivity {
         btKirim = findViewById(R.id.tugas_kirim);
         imgFoto = findViewById(R.id.tugas_gambar);
 
+
+        final MediaPlayer mpabsen = MediaPlayer.create(this, R.raw.absensi);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.aktivitas);
+
         btAmbil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,12 +147,14 @@ public class SpgTugasActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpgMainActivity.class));
                         overridePendingTransition(0,0);
+                        mpdashboard.start();
                         return true;
 
                     case R.id.aktivitas:
                         startActivity(new Intent(getApplicationContext(),
                                 SpgAbsentActivity.class));
                         overridePendingTransition(0,0);
+                        mpabsen.start();
                         return true;
 
                     case R.id. history:

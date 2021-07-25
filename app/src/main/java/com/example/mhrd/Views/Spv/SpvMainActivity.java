@@ -111,6 +111,11 @@ public class SpvMainActivity extends AppCompatActivity {
         btExit = dialog.findViewById(R.id.btCancel);
         btAddUser = dialog.findViewById(R.id.btAddUser);
 
+
+        final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.aktivitas);
+
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
@@ -225,12 +230,14 @@ public class SpvMainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpvMasterActivity.class));
                         overridePendingTransition(0,0);
+                        mpmaster.start();
                         return true;
 
                     case R.id.activity:
                         startActivity(new Intent(getApplicationContext(),
                                 SpvTaskActivity.class));
                         overridePendingTransition(0,0);
+                        mpaktivitas.start();
                         return true;
                 }
                 return false;

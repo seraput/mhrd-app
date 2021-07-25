@@ -95,6 +95,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         final MediaPlayer mpmaster = MediaPlayer.create(this, R.raw.master);
         final MediaPlayer mplaporan = MediaPlayer.create(this, R.raw.laporan);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
 
         option = findViewById(R.id.menu);
         dialog = new Dialog(AdminMainActivity.this);

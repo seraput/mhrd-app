@@ -102,6 +102,11 @@ public class SpgAbsentActivity extends AppCompatActivity {
         getProjectId = user.get(SessionManager.PROJECTID);
         getProject = user.get(SessionManager.PROJECT);
 
+
+        final MediaPlayer mpabsen = MediaPlayer.create(this, R.raw.absensi);
+        final MediaPlayer mpdashboard = MediaPlayer.create(this, R.raw.dashboard);
+        final MediaPlayer mpaktivitas = MediaPlayer.create(this, R.raw.aktivitas);
+
         tvNama.setText(getNama);
         tvProject.setText(getProject);
 
@@ -150,6 +155,7 @@ public class SpgAbsentActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpgMainActivity.class));
                         overridePendingTransition(0,0);
+                        mpdashboard.start();
                         return true;
 
                     case R.id.aktivitas:
@@ -162,6 +168,7 @@ public class SpgAbsentActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),
                                 SpgTugasActivity.class));
                         overridePendingTransition(0,0);
+                        mpaktivitas.start();
                         return true;
                 }
                 return false;

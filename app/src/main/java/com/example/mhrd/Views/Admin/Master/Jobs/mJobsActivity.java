@@ -3,8 +3,10 @@ package com.example.mhrd.Views.Admin.Master.Jobs;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import com.example.mhrd.Models.JobsData;
 import com.example.mhrd.R;
 import com.example.mhrd.Views.Admin.Master.AdminMasterActivity;
 import com.example.mhrd.Views.Admin.Master.Branch.mBranchActivity;
+import com.example.mhrd.Views.Admin.Master.Project.mProjectActivity;
 import com.example.mhrd.Views.Spv.Master.SpvMasterActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -47,10 +50,14 @@ import java.util.Map;
 public class mJobsActivity extends AppCompatActivity {
 
     private String getBranch = Server.URL_API + "getJobs.php";
+    private String NonActive = Server.URL_API + "jobs-nonactive.php";
     JobsAdapter jobsAdapter;
     public static ArrayList<JobsData> jobsDataArrayList = new ArrayList<>();
     JobsData jobsData;
     ListView list;
+    Button closed;
+    Dialog dialog;
+    MaterialEditText jid, pname, oname, juser, jperiode;
     SessionManager sessionManager;
     String getLevel;
     TextView tvLevel;
@@ -65,23 +72,109 @@ public class mJobsActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         getLevel = user.get(SessionManager.LEVEL);
 
+        list = findViewById(R.id.jobsList);
+
         tvLevel = findViewById(R.id.txtLevel);
         tvLevel.setText(getLevel);
-
-
-        list = findViewById(R.id.jobsList);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
-//                startActivity(new Intent(getApplicationContext(), GuruJawabDetail.class)
-//                        .putExtra("position", position));
-            }
-        });
 
         jobsAdapter = new JobsAdapter(mJobsActivity.this, jobsDataArrayList);
         list.setAdapter(jobsAdapter);
         jobsDataArrayList.clear();
+        receiveData();
+
+        dialog = new Dialog(mJobsActivity.this);
+        dialog.setContentView(R.layout.cd_jobs_view);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.bg));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        closed = dialog.findViewById(R.id.cdjClosed);
+        jid = dialog.findViewById(R.id.cdjId);
+        pname = dialog.findViewById(R.id.cdjProject);
+        oname = dialog.findViewById(R.id.cdjOutlet);
+        juser = dialog.findViewById(R.id.cdjUser);
+        jperiode = dialog.findViewById(R.id.cdjPeriode);
+
+        closed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                ProgressDialog progressDialog = new ProgressDialog(view.getContext());
+                CharSequence[] dialogItem = {"View Data", "Non-Active"};
+                builder.setTitle(jobsDataArrayList.get(position).getP_name());
+                builder.setItems(dialogItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch (i) {
+                            case 0:
+                                dialog.show();
+                                jid.setText(jobsDataArrayList.get(position).getId());
+                                pname.setText(jobsDataArrayList.get(position).getP_name());
+                                oname.setText(jobsDataArrayList.get(position).getOutlet_name());
+                                juser.setText(jobsDataArrayList.get(position).getUser_nama());
+                                jperiode.setText(jobsDataArrayList.get(position).getStart());
+                                break;
+                            case 1:
+                                final String getID = jobsDataArrayList.get(position).getId();
+                                final ProgressDialog progressDialog = new ProgressDialog(mJobsActivity.this);
+                                progressDialog.setMessage("Connecting...");
+                                progressDialog.show();
+
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, NonActive,
+                                        new com.android.volley.Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                progressDialog.dismiss();
+                                                try {
+                                                    JSONObject jsonObject = new JSONObject(response);
+                                                    String success = jsonObject.getString("success");
+
+                                                    if (success.equals("1")){
+                                                        receiveData();
+                                                        Toast.makeText(mJobsActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (JSONException e) {
+                                                    System.out.println(e.toString());
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(mJobsActivity.this, "Error Connection", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        },
+                                        new com.android.volley.Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                System.out.println(error.toString());
+                                                progressDialog.dismiss();
+                                                Toast.makeText(mJobsActivity.this, "Error Server", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                {
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("id", getID);
+                                        return params;
+                                    }
+                                };
+                                RequestQueue requestQueue = Volley.newRequestQueue(mJobsActivity.this);
+                                requestQueue.add(stringRequest);
+
+                                break;
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
 
 //        Add.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -111,7 +204,6 @@ public class mJobsActivity extends AppCompatActivity {
 //            }
 //        });
         //Get Data
-        receiveData();
     }
 
     public void back(View view) {
