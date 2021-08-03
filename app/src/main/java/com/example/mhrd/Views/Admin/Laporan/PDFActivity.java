@@ -129,7 +129,7 @@ public class PDFActivity extends AppCompatActivity {
                     }, 2000);
                 }
                 else if (title.equals("Report_Activity")){
-                    DownloadBooks("https://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataKaryawan.pdf","Report_Activity");
+                    DownloadBooks("https://mydbskripsi.000webhostapp.com/hrd-pdf/files/reportActivity.pdf","Report_Activity");
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -140,7 +140,7 @@ public class PDFActivity extends AppCompatActivity {
                     }, 2000);
                 }
                 else if (title.equals("Karyawan_On_Project")){
-                    DownloadBooks("https://mydbskripsi.000webhostapp.com/hrd-pdf/files/dataKaryawan.pdf","Karyawan_On_Project");
+                    DownloadBooks("https://mydbskripsi.000webhostapp.com/hrd-pdf/files/karyawanOnProject.pdf","Karyawan_On_Project");
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
